@@ -41,6 +41,13 @@ var TT = FJNY = {
 		}
 		return "";
 	},
+	formatImg : function(val,row){
+		console.log("============" + val + "=================");
+		if(val){
+			return "<img src='"+val+"' width='80' height='50' onclick = 'showImg(\""+val+"\")'></img>";		
+		}
+		return "";
+	},
 	// 格式化价格
 	formatPrice : function(val,row){
 		return (val/1000).toFixed(2);

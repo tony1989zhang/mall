@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="super-theme-example">
-		<div style="height: 550px;">
+		<div style="height: 350px;">
 			<table id="dg"></table>
 		</div>
 		<br />
@@ -23,7 +23,7 @@
 				pagination: true,
 				fitColumns: true,
 				toolbar: [{
-					text: '添加',
+					text: '新增',
 					iconCls: 'fa fa-plus',
 					handler: function() {}
 				}, {
@@ -38,32 +38,75 @@
 					text: '删除',
 					iconCls: 'fa fa-remove',
 					handler: function() {}
+				},'-',{
+					text:'下架',
+					iconCls:'fa fa-eercast',
+					handler:function(){}
 				}],
 
 				height: 400,
 				columns: [
 					[{
 						field: 'id',
-						title: 'id',
-						width: 100,
-						sortable: true
+						title: '商品ID',
+						width: 60,
+						align:'center'
 					}, {
 						field: 'title',
-						title: '标题',
+						title: '商品标题',
+						width: 200,
+						align:'center'
+					}, {
+						field: 'cid',
+						title: '叶子类目',
 						width: 100,
-						sortable: true
+						align:'center'
+					}, {
+						field: 'sellPoint',
+						title: '卖点',
+						width: 100,
+						align:'center'
 					}, {
 						field: 'price',
 						title: '价格',
-						width: 100,
-						align: 'right',
-						sortable: true
+						width: 70,
+						align:'center'
 					}, {
+						field: 'num',
+						title: '库存数量',
+						width: 70,
+						align:'center'
+					}, {
+						field: 'barcode',
+						title: '条形码数量',
+						width: 100,
+						align:'center'
+					},{
+						field:'status',
+						title:'状态',
+						width:100,
+						formatter:TT.formatItemStatus,
+						align:'center'
+					},  {
 						field: 'image',
 						title: '图片',
 						width: 100,
-						align: 'right'
-					}]
+						formatter:TT.formatImg,
+						align:'center'
+					}, {
+						field: 'created',
+						title: '创建日期',
+						width: 130,
+						formatter:TT.formatDateTime,
+						align:'center'
+					}, {
+						field: 'updated',
+						title: '更新日期',
+						width: 130,
+						formatter:TT.formatDateTime,
+						align:'center'
+					}
+					]
 				]
 			});
 		</script>
