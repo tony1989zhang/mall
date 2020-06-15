@@ -25,7 +25,9 @@
 				toolbar: [{
 					text: '新增',
 					iconCls: 'fa fa-plus',
-					handler: function() {}
+					handler: function() {
+						$("#item-add").click();
+					}
 				}, {
 					text: '编辑',
 					iconCls: 'fa fa-edit',
