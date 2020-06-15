@@ -39,8 +39,12 @@
 					iconCls: 'fa fa-remove',
 					handler: function() {}
 				},'-',{
+					text:'上架',
+					iconCls:'"fa fa-upload',
+					handler:function(){}
+				},{
 					text:'下架',
-					iconCls:'fa fa-eercast',
+					iconCls:'"fa fa-download',
 					handler:function(){}
 				}],
 
@@ -78,7 +82,7 @@
 						align:'center'
 					}, {
 						field: 'barcode',
-						title: '条形码数量',
+						title: '条形码',
 						width: 100,
 						align:'center'
 					},{
