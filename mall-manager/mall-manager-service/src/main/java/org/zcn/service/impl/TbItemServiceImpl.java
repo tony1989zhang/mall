@@ -14,7 +14,7 @@ import org.zcn.pojo.TbItemExample;
 import org.zcn.service.TbItemService;
 import org.zcn.utils.EasyUIDataGridResult;
 import org.zcn.utils.FjnyResult;
-import org.zcn.utils.IdRandom;
+import org.zcn.utils.IDUtils;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -44,7 +44,7 @@ public class TbItemServiceImpl implements TbItemService {
 
 	@Override
 	public FjnyResult saveItem(TbItem tbItem, String desc) {
-		tbItem.setId(IdRandom.getId());
+		tbItem.setId(IDUtils.genItemId());
 		tbItem.setStatus((byte)1);
 		tbItem.setCreated(new Date());
 		tbItem.setUpdated(new Date());
