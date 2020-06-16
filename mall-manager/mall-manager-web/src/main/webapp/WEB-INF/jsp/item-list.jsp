@@ -9,7 +9,7 @@
 <body>
 	<div class="super-theme-example">
 		<div style="height: 350px;">
-			<table id="dg"></table>
+			<table id="dgTbItem"></table>
 		</div>
 		<br />
 		<br />
@@ -17,7 +17,7 @@
 	</div>
 	<script type="text/javascript">
 	
-		$('#dg').datagrid({
+		$('#dgTbItem').datagrid({
 				url: 'item/getItem',
 				fit: true,
 				pagination: true,
