@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.zcn.service.PictureService;
+import org.zcn.utils.ExceptionUtil;
 import org.zcn.utils.FtpUtil;
 import org.zcn.utils.IDUtils;
 import org.zcn.utils.PictureResult;
@@ -33,10 +34,9 @@ public class PictureServiceImpl implements PictureService {
 				//取文件扩展名
 				String originalFilename = uploadFile.getOriginalFilename();
 				String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
-				//生成新文件名
-				//可以使用uuid生成新文件名。
-				//UUID.randomUUID()
-				//可以是时间+随机数生成文件名
+				System.out.println("originalFilename:" + originalFilename);
+				System.out.println("ext:" + ext);
+				//时间+随机数生成文件名
 				String imageName = IDUtils.genImageName();
 				//把图片上传到ftp服务器（图片服务器）
 				//需要把ftp的参数配置到配置文件中
