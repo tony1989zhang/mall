@@ -50,10 +50,14 @@ public class TbItemServiceImpl implements TbItemService {
 		tbItem.setUpdated(new Date());
 		int a=tbItemMapper.insertSelective(tbItem);
 		TbItemDesc record = new TbItemDesc();
-		/*
-		 * record.setItemId(tbItem.getId()); record.setItemDesc(desc); int
-		 * insertSelective2 = tbItemDescMapper.insertSelective(record);
-		 */
+		record.setItemId(tbItem.getId());
+		record.setItemDesc(desc);
+		record.setCreated(new Date());
+		record.setUpdated(new Date());
+		int insertSelective2 = tbItemDescMapper.insertSelective(record);
+		if(a<0||insertSelective2<0) {
+			return FjnyResult.build(500,"添加失败");
+		} 
 		return FjnyResult.ok();
 	}
 

@@ -16,7 +16,16 @@
 		<table id="pg" style="width: 300px"></table>
 	</div>
 	<script type="text/javascript">
-	
+	  function getSelectionsIds(){
+	    	var itemList = $("#dgTbItem");
+	    	var sels = itemList.datagrid("getSelections");
+	    	var ids = [];
+	    	for(var i in sels){
+	    		ids.push(sels[i].id);
+	    	}
+	    	ids = ids.join(",");
+	    	return ids;
+	    }
 		$('#dgTbItem').datagrid({
 				url: 'item/getItem',
 				fit: true,
@@ -32,14 +41,34 @@
 					text: '编辑',
 					iconCls: 'fa fa-edit',
 					handler: function() {}
-				}, {
+				}
+			/* 	, {
 					text: '保存',
 					iconCls: 'fa fa-save',
 					handler: function() {}
-				},{
+				} */,{
 					text: '删除',
 					iconCls: 'fa fa-remove',
-					handler: function() {}
+					handler: function() {
+						var ids = getSelectionsIds();
+			        	if(ids.length == 0){
+			        		$.messager.alert('提示','未选中商品!');
+			        		return ;
+			        	}
+			        	$.messager.confirm('确认','确定删除ID为 '+ids+' 的商品吗？',function(r){
+			        	    if (r){
+			        	    	var params = {"ids":ids};
+			                	$.post("/rest/item/delete",params, function(data){
+			            			if(data.status == 200){
+			            				$.messager.alert('提示','删除商品成功!',undefined,function(){
+			            					$("#itemList").datagrid("reload");
+			            				});
+			            			}
+			            		});
+			        	    }
+			        	});
+			        }
+						
 				},'-',{
 					text:'上架',
 					iconCls:'"fa fa-upload',
