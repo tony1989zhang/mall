@@ -14,18 +14,11 @@
 		<br />
 		<br />
 		<table id="pg" style="width: 300px"></table>
+		<div id="itemEditWindow" class="easyui-window" title="My Window" style="width:80%;height:80%;"
+    data-options="iconCls:'icon-save',modal:true,closed:'true',href:'/item-edit'"></div>
 	</div>
 	<script type="text/javascript">
-	  function getSelectionsIds(){
-	    	var itemList = $("#dgTbItem");
-	    	var sels = itemList.datagrid("getSelections");
-	    	var ids = [];
-	    	for(var i in sels){
-	    		ids.push(sels[i].id);
-	    	}
-	    	ids = ids.join(",");
-	    	return ids;
-	    }
+		
 		$('#dgTbItem').datagrid({
 				url: 'item/getItem',
 				fit: true,
@@ -40,7 +33,31 @@
 				}, {
 					text: '编辑',
 					iconCls: 'fa fa-edit',
-					handler: function() {}
+					handler: function() {
+						var ids = getSelectionsIds();
+			        	if(ids.length == 0){
+			        		$.messager.alert('提示','必须选择一个商品才能编辑!');
+			        		return ;
+			        	}
+			        	if(ids.indexOf(',') > 0){
+			        		$.messager.alert('提示','只能选择一个商品!');
+			        		return ;
+			        	}
+			        	//进行数据回显
+			        	$('#itemEditWindow').window({
+			        		onLoad:function(){
+			        			var data = $("#dgTbItem").datagrid("getSelections")[0];
+			        			console.log("data:" + data)
+			        			$('#itemeEditForm').form('load',data);
+			        			TT.init({
+			        				"pics" : data.image,
+			        				"cid" : data.cid,
+			        				fun:function(node){
+			        				}
+			        			});
+			        		}
+			        	}).window('open');
+					}
 				}
 			/* 	, {
 					text: '保存',
@@ -144,6 +161,16 @@
 					]
 				]
 			});
+		  function getSelectionsIds(){
+		    	var itemList = $("#dgTbItem");
+		    	var sels = itemList.datagrid("getSelections");
+		    	var ids = [];
+		    	for(var i in sels){
+		    		ids.push(sels[i].id);
+		    	}
+		    	ids = ids.join(",");
+		    	return ids;
+		    }
 		</script>
 </body>
 </html>
