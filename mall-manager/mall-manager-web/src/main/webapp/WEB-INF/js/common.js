@@ -25,7 +25,7 @@ var TT = FJNY = {
 		//指定上传文件参数名称
 		filePostName  : "uploadFile",
 		//指定上传文件请求的url。
-		uploadJson : '/pic/upload',
+		uploadJson : '${pageContext.request.contextPath}/pic/upload',
 		//上传类型，分别为image、flash、media、file
 		dir : "image"
 	},
@@ -131,7 +131,7 @@ var TT = FJNY = {
     			    onOpen : function(){
     			    	var _win = this;
     			    	$("ul",_win).tree({
-    			    		url:'/item/cat/list',
+    			    		url:'${pageContext.request.contextPath}/item/cat/list',
     			    		animate:true,
     			    		onClick : function(node){
     			    			if($(this).tree("isLeaf",node.target)){
@@ -198,10 +198,11 @@ var TT = FJNY = {
     },
     
     changeItemParam : function(node,formId){
-    	$.getJSON("/item/param/query/itemcatid/" + node.id,function(data){
+    	$.getJSON("${pageContext.request.contextPath}/item/param/query/itemcatid/" + node.id,function(data){
 			  if(data.status == 200 && data.data){
 				 $("#"+formId+" .params").show();
 				 var paramData = JSON.parse(data.data.paramData);
+				 console.log("paramData:" + paramData);
 				 var html = "<ul>";
 				 for(var i in paramData){
 					 var pd = paramData[i];
@@ -216,10 +217,12 @@ var TT = FJNY = {
 					 html+="</li></table>";
 				 }
 				 html+= "</ul>";
-				 $("#"+formId+" .params td").eq(1).html(html);
+				 $("#"+formId+" .params div").html(html);
+				// $("#"+formId+" .params td").eq(1).html(html);
 			  }else{
 				 $("#"+formId+" .params").hide();
-				 $("#"+formId+" .params td").eq(1).empty();
+				 $("#"+formId+" .params div").empty();
+				// $("#"+formId+" .params td").eq(1).empty();
 			  }
 		  });
     },

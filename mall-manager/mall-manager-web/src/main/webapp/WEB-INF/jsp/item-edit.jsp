@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<link href="/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<link href="${pageContext.request.contextPath}/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <style type="text/css">
 .form-item {
 	margin-bottom: 15px;
@@ -90,7 +90,7 @@
 		itemEditEditor.sync();
 		//ajax的post方式提交表单
 		alert($("#itemEditForm").serialize());
-		$.post("/item/update",$("#itemeEditForm").serialize(), function(data){
+		$.post("${pageContext.request.contextPath}/item/update",$("#itemeEditForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','修改商品成功!','info',function(){
 					$("#itemEditWindow").window('close');

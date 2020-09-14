@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<link href="/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<link href="${pageContext.request.contextPath}/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <style type="text/css">
 .form-item {
 	margin-bottom: 15px;
@@ -61,9 +61,11 @@
 			<label for="" class="label-top" style="align-content: center;">商品描述:</label>
 			  <textarea style="width:800px;height:300px;visibility:hidden;" name="desc"></textarea>
 		</div>
-		<div class="form-item">
-			<label for="" class="label-top params hide">商品规格:</label>
+		<div class="form-item params hide">
+			<label for="" class="label-top">商品规格:</label>
+			 <div>#itemAddForm .params div</div>
 		</div>
+		<input type="hidden" name="itemParams"/>
 			<div class="form-item">
 			<a href="javascript:void(0)" class="easyui-linkbutton warning"
 				onclick="clearForm()">取消</a> <a href="javascript:void(0)"
@@ -96,10 +98,33 @@
 		}
 		//同步文本框中的商品描述
 		itemAddEditor.sync();
+		
+		//取商品的规格
+		var paramJson = [];
+		$("#itemAddForm .params li").each(function(i,e){
+			var trs = $(e).find("tr");
+			var group = trs.eq(0).text();
+			var ps = [];
+			for(var i = 1;i<trs.length;i++){
+				var tr = trs.eq(i);
+				ps.push({
+					"k" : $.trim(tr.find("td").eq(0).find("span").text()),
+					"v" : $.trim(tr.find("input").val())
+				});
+			}
+			paramJson.push({
+				"group" : group,
+				"params": ps
+			});
+		});
+		//把json对象转换成字符串
+		paramJson = JSON.stringify(paramJson);
+		$("#itemAddForm [name=itemParams]").val(paramJson);
+		
+		
 		//ajax的post方式提交表单
-		//$("#itemAddForm").serialize()将表单序列号为key-value形式的字符串
 		alert($("#itemAddForm").serialize());
-		$.post("/item/save",$("#itemAddForm").serialize(), function(data){
+		$.post("${pageContext.request.contextPath}/item/save",$("#itemAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$("#dgTbItem").datagrid("reload");
 				$.messager.alert('操作成功', '恭喜您添加产品成功', 'warning', function() {

@@ -7,7 +7,7 @@
 		</div>
 <script>
 $('#itemParamList').datagrid({
-	url: '/item/param/list',
+	url: '${pageContext.request.contextPath}/item/param/list',
 	fit: true,
 	pagination: true,
 	fitColumns: true,
@@ -16,7 +16,7 @@ $('#itemParamList').datagrid({
 		iconCls: 'fa fa-plus',
 		handler: function() {
 			TT.createWindow({
-        		url : "/item-param-add",
+        		url : "${pageContext.request.contextPath}/item-param-add",
         	});
 		}
 	}, {
@@ -37,7 +37,7 @@ $('#itemParamList').datagrid({
         	$.messager.confirm('确认','确定删除ID为 '+ids+' 的商品规格吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/item/param/delete",params, function(data){
+                	$.post("${pageContext.request.contextPath}/item/param/delete",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','删除商品规格成功!',undefined,function(){
             					$("#itemParamList").datagrid("reload");
@@ -67,7 +67,7 @@ $('#itemParamList').datagrid({
 			field: 'paramData',
 			title: '规格(只显示分组名称)',
 			width: 300,
-			formatter:TT.formatItemParamData
+			formatter:formatItemParamData
 		},{
 			field: 'created',
 			title: '创建日期',
@@ -107,7 +107,7 @@ $('#itemParamList').datagrid({
         iconCls:'fa fa-plus',
         handler:function(){
         	TT.createWindow({
-        		url : "/item-param-add",
+        		url : "${pageContext.request.contextPath}/item-param-add",
         	});
         }
     },{
@@ -128,7 +128,7 @@ $('#itemParamList').datagrid({
         	$.messager.confirm('确认','确定删除ID为 '+ids+' 的商品规格吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/item/param/delete",params, function(data){
+                	$.post("${pageContext.request.contextPath}/item/param/delete",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','删除商品规格成功!',undefined,function(){
             					$("#itemParamList").datagrid("reload");

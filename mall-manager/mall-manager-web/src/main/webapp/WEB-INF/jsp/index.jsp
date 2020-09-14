@@ -26,7 +26,7 @@
 <script type="text/javascript" charset="utf-8"
 	src="${pageContext.request.contextPath}/easyui/themes/super/super.js"></script>
 <script src="${pageContext.request.contextPath}/js/superDemo.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
 </head>
 <body id="main" class="easyui-layout">
 	<div data-options="region:'north',border:false" class="super-north">
@@ -70,9 +70,9 @@
 			data-options="border:false,fit:true,selected:true">
 			<div title="商品管理" data-options="iconCls:'fa fa-table'">
 				<ul>
-					<li id = "item-list" data-url='item-list'>商品列表</li>
-					<li id = "item-add"  data-url='item-add'>添加商品</li>
-					<li id = "item-param-list"  data-url='item-param-list'>规格参数</li>
+					<li id = "item-list" data-url='${pageContext.request.contextPath}/item-list'>商品列表</li>
+					<li id = "item-add"  data-url='${pageContext.request.contextPath}/item-add'>添加商品</li>
+					<li id = "item-param-list"  data-url='${pageContext.request.contextPath}/item-param-list'>规格参数</li>
 				</ul>
 			</div>
 		</div>

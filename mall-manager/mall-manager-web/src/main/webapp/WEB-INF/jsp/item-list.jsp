@@ -15,12 +15,12 @@
 		<br />
 		<table id="pg" style="width: 300px"></table>
 		<div id="itemEditWindow" class="easyui-window" title="My Window" style="width:80%;height:80%;"
-    data-options="iconCls:'icon-save',modal:true,closed:'true',href:'/item-edit'"></div>
+    data-options="iconCls:'icon-save',modal:true,closed:'true',href:'${pageContext.request.contextPath}/item-edit'"></div>
 	</div>
 	<script type="text/javascript">
 		
 		$('#dgTbItem').datagrid({
-				url: 'item/getItem',
+				url: '${pageContext.request.contextPath}/item/getItem',
 				fit: true,
 				pagination: true,
 				fitColumns: true,
@@ -75,10 +75,10 @@
 			        	$.messager.confirm('确认','确定删除ID为 '+ids+' 的商品吗？',function(r){
 			        	    if (r){
 			        	    	var params = {"ids":ids};
-			                	$.post("/rest/item/delete",params, function(data){
+			                	$.post("${pageContext.request.contextPath}/rest/item/delete",params, function(data){
 			            			if(data.status == 200){
 			            				$.messager.alert('提示','删除商品成功!',undefined,function(){
-			            					$("#itemList").datagrid("reload");
+			            					$("#dgTbItem").datagrid("reload");
 			            				});
 			            			}
 			            		});
