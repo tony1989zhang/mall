@@ -42,7 +42,7 @@ public class TbItemController {
 	
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
-	public FjnyResult saveItem(TbItem tbItem,String desc){
-		return tbItemService.saveItem(tbItem,desc);
+	public FjnyResult saveItem(TbItem tbItem,String desc,String itemParams){
+		return tbItemService.saveItem(tbItem,desc,itemParams);
 	}
 }
